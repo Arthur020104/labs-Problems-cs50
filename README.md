@@ -1,9 +1,8 @@
-# Tarefas do curso cs50(:snake:-SQL)
+# Tarefas do curso cs50(:snake:-SQL-C)
 
-##### Problemas do curso cs50 de havard que utilizou as linguagens Python e SQL
-
-
+##### Problemas do curso cs50 de havard com as linguagens Python, SQL e C.
 
 - :snake: Python: labs-problems 
 - SQL: lab e problem
+- C: labs-Problems(C)
 
