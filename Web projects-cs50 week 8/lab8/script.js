@@ -4,6 +4,7 @@ function checkRatio(event, id)
     let triggerObject = event.srcElement;
     let reponse = triggerObject.innerHTML;
     let answer = document.querySelector('#response_multi');
+    but.style.transition=".4s ease all"
     if(reponse == "a) eleitoral, que, ao instituir o voto direto para os cargos eletivos do Império, ao mesmo tempo em que proibiu o voto dos analfabetos, reduziu notavelmente a participação eleitoral dos setores populares.")
     {
         answer.innerHTML ="Your response is right!";
@@ -27,6 +28,7 @@ function submit()
     let response = document.querySelector('#response_free');
     let answer = document.querySelector('#answer').value;
     let estilo = document.querySelector('#answer');
+    estilo.style.transition=".5s ease all"
     if(answer.toLowerCase() == 'luis xiv')
     {
         estilo.style.backgroundColor= '#006400';
