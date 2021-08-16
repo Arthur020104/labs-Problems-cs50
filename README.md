@@ -1,6 +1,6 @@
 # Tarefas do curso cs50(:snake:-SQL-<img align="center" alt="Arthur-C" height="35" width="45" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg">-<img align="center" alt="Arthur-Js" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-plain.svg">-<img align="center" alt="Arthur-html" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg">-<img align="center" alt="Arthur-CSS" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg">)
 
-##### Problemas do curso cs50 de havard com as linguagens Python, SQL e C.
+##### Problemas do curso cs50 de havard com as linguagens Python, SQL, C, Js, HTML e CSS.
 
 - :snake: Python: labs-problems 
 - SQL: lab e problem
