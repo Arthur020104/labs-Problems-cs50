@@ -42,9 +42,7 @@ button
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     vertical-align: middle;
     margin:0.2em 1em 0 0;
-    -webkit-box-shadow: 10px 10px 4px -7px rgba(0,0,0,0.57);
-    -moz-box-shadow: 10px 10px 4px -7px rgba(0,0,0,0.57);
-    box-shadow: 10px 10px 4px -7px rgba(0,0,0,0.57);
+    
 }
 
 
@@ -52,7 +50,6 @@ input[type="text"]
 {
     line-height: 1.8;
     width: 25%;
-    border-radius: 0.55rem;
 }
 
 input[type="text"]:hover 
@@ -66,4 +63,8 @@ input[type="text"]:hover
     margin-right: auto;
     padding-left: 15px;
     padding-right: 15px;
+}
+.alert
+{
+    margin-top: 0.5rem;
 }
