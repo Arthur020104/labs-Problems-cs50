@@ -5,9 +5,14 @@
 {% endblock %}
 
 {% block main %}
+{% if quantity %}
+<h3>Cash available = USD{{(cash-(quantity*shareprice))|round(2)}}</h3>
+{% else %}
+<h3>Cash available = USD{{cash|round(2)}}</h3>
+{% endif %}
     <form action="/buy" method="post">
         <div class="form-group">
-            <input autocomplete="off" autofocus class="form-control" name="share" placeholder="Share-Code" type="text">
+            <input autocomplete="off" autofocus class="form-control" name="share" placeholder="Stock-Code" type="text">
             <input autocomplete="off" autofocus class="form-control number" name="quantity" placeholder="Quantity" type="number">
         </div>
         <button class="btn btn-primary" type="submit">Buy</button>
@@ -19,7 +24,7 @@
                 <tr>
                     <th>Company</th>
                     <th>Amount</th>
-                    <th>Price(per share)</th>
+                    <th>Price(per stock)</th>
                     <th>Price(total)<br></th>
                 </tr>
             </thead>

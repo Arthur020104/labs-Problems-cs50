@@ -12,7 +12,7 @@
                 <tr>
                     <th>Share-Code</th>
                     <th>Quantity</th>
-                    <th>Price(per share)</th>
+                    <th>Price(per sto)</th>
                     <th>Type</th>
                     <th>Money transfered</th>
                     <th>Date</th>
@@ -24,10 +24,10 @@
                 <tr>
                     <td>{{ transaction.share }}</td>
                     <td>{{ transaction.quantity }}</td>
-                    <td>{{transaction.price}}</td>
+                    <td>{{USD~transaction.price|round(2)}}</td>
                     <td>{{transaction.type}}</td>
                     {% if transaction.type == 'buy' %}
-                    <td style="color: red;">{{ "-"~transaction.price*transaction.quantity }}</td>
+                    <td style="color: red;">{{ "-"~(transaction.price*transaction.quantity)|round(2) }}</td>
                     {% elif transaction.type == 'sell' %}
                     <td style="color: green;">{{ "+"~transaction.price*transaction.quantity }}</td>
                     {% endif %}

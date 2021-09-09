@@ -62,17 +62,17 @@ def index():
 @login_required
 def buy():
     """Buy shares of stock"""
+    user_id = session.get("user_id")
+    cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)
     if request.method == "GET":
-        return render_template("buy.html")
+        return render_template("buy.html",cash=cash[0]['cash'])
     if request.method == "POST":
         share = request.form.get("share").upper()
         quantity = int(request.form.get("quantity"))
-        user_id = session.get("user_id")
         shareinfo = lookup(share)
         if shareinfo == None:
             return apology("Share does't exist")
         lost = float(shareinfo["price"]) * quantity
-        cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)
         if cash[0]['cash'] > lost :
             db.execute("UPDATE users SET cash = ? WHERE id = ?" ,float(cash[0]['cash']) - lost, user_id)
             todays_date = datetime.date.today()
@@ -80,10 +80,10 @@ def buy():
             wallet_quant = db.execute("SELECT quantity FROM wallet WHERE user_id = ? AND share = ?",user_id,str(share))
             if wallet_quant :#not NULL
                 db.execute("UPDATE wallet SET quantity = ? WHERE user_id = ? AND share = ?",int(wallet_quant[0]["quantity"] + quantity), user_id, share)#wallet_quant[0]["quantity"] can only be acess if exist
-                return render_template("buy.html",sharename = shareinfo["name"], quantity = quantity, lost = lost, shareprice = shareinfo["price"])
+                return render_template("buy.html",sharename = shareinfo["name"], quantity = quantity, lost = lost, shareprice = shareinfo["price"],cash=cash[0]['cash'])
             else:
                 db.execute("INSERT INTO wallet (share, user_id, quantity, name) VALUES(?, ?, ?, ?)", share, user_id, quantity, shareinfo["name"])
-                return render_template("buy.html",sharename = shareinfo["name"], quantity = quantity, lost = lost, shareprice = shareinfo["price"])
+                return render_template("buy.html",sharename = shareinfo["name"], quantity = quantity, lost = lost, shareprice = shareinfo["price"],cash=cash[0]['cash'])
         else:
             return apology("Your money isn't enough")
 
@@ -162,7 +162,7 @@ def register():
     """Register user"""
     username = request.form.get("username")
     password = request.form.get("password")
-    passwordconf = request.form.get("passwordconf")
+    passwordconf = request.form.get("confpassword")
     if password != passwordconf:
         return apology("The password and the confirm password are different", 403)
     #TODO passwordconf on js
@@ -194,7 +194,13 @@ def sell():
         cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)
         wallet_quant = db.execute("SELECT quantity FROM wallet WHERE user_id = ? AND share = ?",user_id,str(share))
         if wallet_quant:#not NULL
-            if wallet_quant[0]["quantity"] >= quantity:
+            if wallet_quant[0]["quantity"] - quantity == 0:
+                db.execute("UPDATE users SET cash = ? WHERE id = ?" ,float(cash[0]['cash']) + profit, user_id)
+                todays_date = datetime.date.today()
+                db.execute("INSERT INTO transactions(type, user_id, quantity, share, price, time) VALUES(?, ?, ?, ?, ?, ?)","sell", user_id, int(quantity), share, float(shareinfo["price"]), str(todays_date))
+                db.execute("DELETE FROM wallet WHERE quantity = ? AND user_id = ? AND share = ?",int(wallet_quant[0]["quantity"]), user_id, share)#wallet_quant[0]["quantity"] can only be acess if exist
+                return render_template("sell.html",sharename = shareinfo["name"], quantity = quantity, profit = profit, shareprice = shareinfo["price"])
+            elif wallet_quant[0]["quantity"] >= quantity:
                 db.execute("UPDATE users SET cash = ? WHERE id = ?" ,float(cash[0]['cash']) + profit, user_id)
                 todays_date = datetime.date.today()
                 db.execute("INSERT INTO transactions(type, user_id, quantity, share, price, time) VALUES(?, ?, ?, ?, ?, ?)","sell", user_id, int(quantity), share, float(shareinfo["price"]), str(todays_date))

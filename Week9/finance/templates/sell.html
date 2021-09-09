@@ -7,7 +7,7 @@
 {% block main %}
     <form action="/sell" method="post">
         <div class="form-group">
-            <input autocomplete="off" autofocus class="form-control" name="share" placeholder="Share-Code" type="text">
+            <input autocomplete="off" autofocus class="form-control" name="share" placeholder="Stock-Code" type="text">
             <input autocomplete="off" autofocus class="form-control number" name="quantity" placeholder="Quantity" type="number">
         </div>
         <button class="btn btn-primary" type="submit">Sell</button>
@@ -19,7 +19,7 @@
                 <tr>
                     <th>Company</th>
                     <th>Amount</th>
-                    <th>Price sold(per share)</th>
+                    <th>Price sold(per stock)</th>
                     <th>Price(total)<br></th>
                 </tr>
             </thead>
